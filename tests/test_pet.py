@@ -113,7 +113,7 @@ def test_new_pet_invalid_timeframe():
 
 def test_new_pet_invalid_immortal():
     pet = Pet(immortal=-12)
-    assert pet.timeframe == DEFAULT_TIMEFRAME, f"Expected immortal=False, instead got {pet.timeframe}"
+    assert pet.immortal == False, f"Expected immortal=False, instead got {pet.timeframe}"
 
 
 @freezegun.freeze_time("2024-10-28 0:00:00")
