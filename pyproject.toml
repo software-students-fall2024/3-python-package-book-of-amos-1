@@ -7,7 +7,7 @@ name = "pymagotchi"
 description = "A Python-based virtual pet simulation package with customizable care and stats tracking."
 version = "0.1.0"
 authors = [
-  { name="book-of-amos", email="bookofamos@nyu.edu" },
+  { name="book-of-amos", email="dm6288@nyu.edu" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
