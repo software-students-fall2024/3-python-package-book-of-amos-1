@@ -27,7 +27,7 @@ pip install pymagotchi
 ## Usage
 Once installed, you can run pymagotchi from the terminal to start the game.
 ```bash
-python -m pymagotchi
+pymagotchi
 ```
 Alternatively, you can create and interact with your pymagotchi pet within your python code.
 ```python
