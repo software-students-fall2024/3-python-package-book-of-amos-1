@@ -48,6 +48,24 @@ my_pet.rename(new_name='new name')
 # Display ascii representation of pet
 my_pet.display()
 ```
+## Documentation
+
+Pet Class
+
+*	Pet(name=None, timeframe=DEFAULT_TIMEFRAME, immortal=False): Initializes a pet with a name, timeframe (rate of stat depletion), and immortality setting.
+*	feed(amount): Increases the pet’s food level by the specified amount.
+*	play(duration): Increases the pet’s happiness by the specified duration.
+*	sleep(duration): Increases the pet’s sleep level by the specified duration.
+*	rename(new_name): Changes the pet’s name to new_name.
+*	update_stats(): Updates the pet’s stats based on time elapsed.
+*	display_art(): Shows the pet’s mood as ASCII art.
+
+generate_name()
+
+*	Generates and returns a random pet name.
+
+For more details, you can view the [`__main__.py`](https://github.com/software-students-fall2024/3-python-package-book-of-amos-1/blob/pypi-uploading/pymagotchi/__main__.py) file, which contains the full example code.
+
 ## Pet Commands
 
 * Feed
@@ -60,9 +78,36 @@ Python 3.7 or higher.
 
 ## Contributing
 
+To contribute to PyMagotchi:
+
+	1.	Clone the Repository: 
+
+    git clone https://github.com/software-students-fall2024/3-python-package-book-of-amos-1.git
+    cd 3-python-package-book-of-amos-1
+
+    2.	Set Up a Virtual Environment:
+    Use pipenv to set up the environment:
+
+    pipenv install --dev
+    pipenv shell
+
+    3.	Build and Test:
+    Run the following to build and test the package:
+
+    python -m build
+    pipenv run pytest
+
+
 ## Authors
-* https://github.com/bairixie
+* https://github.com/bairixie (Sean Mo)
 * https://github.com/dm6288
 * https://github.com/naruminato1
 * https://github.com/simesherbs
 
+## Configuration and Setup Instructions
+Run the Project
+
+	1.	Install Dependencies: Run pip install pymagotchi to install the package from PyPI, or clone the repository and set up the development environment as shown above.
+	2.	Run the Interactive Pet Simulation:
+    
+        pymagotchi
