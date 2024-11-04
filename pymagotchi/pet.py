@@ -1,7 +1,6 @@
-from time import time, sleep
+from time import time
 from .names import generate_name
 from .constants import DEFAULT_TIMEFRAME, MAX_STAT_VALUE
-
 
 class Pet:
     def __init__(self, name=None, timeframe=DEFAULT_TIMEFRAME, immortal: bool = False):
@@ -37,13 +36,16 @@ class Pet:
         difference = self.time_elapsed()
         for stat in ["food", "sleep", "happiness"]:
             if self.rates[stat] != 0:
-                self.stats[stat] = max(
-                    0, self.stats[stat] - difference // self.rates[stat])
+                self.stats[stat] = max(0, self.stats[stat] - difference // self.rates[stat])
             else:
                 self.stats[stat] = max(0, self.stats[stat])
 
-        self.stats["health"] = (
-            self.stats["sleep"] + self.stats["food"] + self.stats["happiness"]) // 3
+        if not self.immortal:  
+            self.stats["health"] = (self.stats["sleep"] + self.stats["food"] + self.stats["happiness"]) // 3
+        else:
+            self.stats["health"] = max(1, self.stats["health"])  # min of 1 health if immortal
+        # self.stats["health"] = (
+        #     self.stats["sleep"] + self.stats["food"] + self.stats["happiness"]) // 3
 
     # Print the pet's current stats
     def status(self):
@@ -83,15 +85,98 @@ class Pet:
             print("Invalid name. Please enter a valid name.")
 
     def display_art(self):
-        if self.stats["health"] > 50:
-            print(r"""
-               ^_^
-            """)
-        else:
-            print(r"""
-               T_T
-            """)
+        """
+        Shows ASCII art --> different expressions based on health, happiness, food, and sleep levels.
+        """
+        def get_primary_state():
+            stats = {
+                "health": self.stats["health"],
+                "food": self.stats["food"],
+                "sleep": self.stats["sleep"],
+                "happiness": self.stats["happiness"]
+            }
+            lowest_stat = min(stats, key=stats.get)
+            lowest_value = stats[lowest_stat]
+            if lowest_value >= 80:
+                return "excellent"
+            elif lowest_value >= 60:
+                return "good"
+            elif lowest_value >= 40:
+                return "fair"
+            elif lowest_value >= 20:
+                return "poor"
+            else:
+                return "critical"
 
+        def get_sleep_indicator():
+            if self.stats["sleep"] < 30:
+                return "(-_-) zzz..."
+            return ""
+
+        def get_food_indicator():
+            if self.stats["food"] < 30:
+                return "(っ˘ڡ˘ς)"
+            return ""
+        # asciis
+        expressions = {
+            "excellent": r"""
+            ∩∩
+            (^▽^)
+            (つ🎀⊂)
+            U U""",
+            
+            "good": r"""
+            ∩∩
+            (´▽`)
+            (つ⊂)
+            U U""",
+            
+            "fair": r"""
+            ∩∩
+            (•́ω•̀)
+            (つ⊂)
+            U U""",
+            
+            "poor": r"""
+            ∩∩
+            (；ω；)
+            (つ⊂)
+            U U""",
+            
+            "critical": r"""
+            ∩∩
+            (╥﹏╥)
+            (つ⊂)
+            U U"""
+        }
+
+        current_state = get_primary_state()
+        art = expressions[current_state]
+
+        indicators = []
+        sleep_indicator = get_sleep_indicator()
+        food_indicator = get_food_indicator()
+        
+        if sleep_indicator:
+            indicators.append(sleep_indicator)
+        if food_indicator:
+            indicators.append(food_indicator)
+
+        print(f"\n{'-' * 20}")
+        print(f"   {self.name}")
+        print(art)
+        if indicators:
+            print(" ".join(indicators))
+        print(f"{'-' * 20}")
+        
+        messages = {
+            "excellent": f"{self.name} is very happy!",
+            "good": f"{self.name} is doing well!",
+            "fair": f"{self.name} could use some attention...",
+            "poor": f"{self.name} needs care soon!",
+            "critical": f"{self.name} needs immediate attention!"
+        }
+        print(messages[current_state])
 
 # Wrapper to make new pet object
 def new_pet(name=None, timeframe=None, immortal=False):
@@ -130,3 +215,4 @@ def main():
 if __name__ == "__main__":
     main()
 """
+
