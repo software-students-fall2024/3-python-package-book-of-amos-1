@@ -119,3 +119,6 @@ or clone the repository and set up the development environment as shown above.
 ```bash
 pymagotchi
 ```
+
+## License
+This project is licensed under the GNU General Public License. See the LICENSE file for details.
