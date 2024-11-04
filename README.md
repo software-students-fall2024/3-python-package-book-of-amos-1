@@ -111,9 +111,9 @@ Run the Project
 
 1.	Install Dependencies: 
 ```bash
-Run pip install pymagotchi 
+pip install pymagotchi 
  ``` 
-to install the package from PyPI, or clone the repository and set up the development environment as shown above.
+or clone the repository and set up the development environment as shown above.
 
 2.	Run the Interactive Pet Simulation:
 ```bash
